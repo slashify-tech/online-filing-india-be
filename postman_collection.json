@@ -1,0 +1,655 @@
+{
+	"info": {
+		"_postman_id": "wisetalk-hello-api-collection",
+		"name": "Wisetalk Hello API - Sub Services & Service Contents",
+		"description": "API collection for Sub Services and Service Contents management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sub Services",
+			"item": [
+				{
+					"name": "Get All Sub Services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sub-services",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sub-services"
+							]
+						},
+						"description": "Get all sub-services (categories like 'Start Business', 'Manage Business') with their service cards"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sub Service by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sub-services/:slug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sub-services",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "start-business",
+									"description": "Sub service slug (e.g., start-business, manage-business)"
+								}
+							]
+						},
+						"description": "Get a specific sub-service by slug with all its service cards"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Card with Content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sub-services/service-card/:serviceCardSlug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sub-services",
+								"service-card",
+								":serviceCardSlug"
+							],
+							"variable": [
+								{
+									"key": "serviceCardSlug",
+									"value": "public-limited-company",
+									"description": "Service card slug (e.g., public-limited-company, private-limited-company)"
+								}
+							]
+						},
+						"description": "Get a service card with its full detailed content including hero section, packages, FAQs, etc."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sub Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"slug\": \"new-category\",\n  \"title\": \"New Category Title\",\n  \"ServiceCard\": [\n    {\n      \"icon\": \"icon.svg\",\n      \"title\": \"Service Card Title\",\n      \"slug\": \"service-card-slug\",\n      \"content\": \"Service card description\",\n      \"serviceContentId\": null\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sub-services",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sub-services"
+							]
+						},
+						"description": "Create a new sub-service category"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing sub-services (main categories)"
+		},
+		{
+			"name": "Service Contents",
+			"item": [
+				{
+					"name": "Get All Service Contents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/service-contents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"service-contents"
+							]
+						},
+						"description": "Get all service contents (detailed content for all business types)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Content by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/service-contents/:slug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"service-contents",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "public-limited-company",
+									"description": "Service content slug (e.g., public-limited-company, private-limited-company, one-person-company-opc)"
+								}
+							]
+						},
+						"description": "Get detailed service content by slug including all sections: hero, packages, FAQs, timeline, etc."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Content by Service Card Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/service-contents/service-card/:serviceCardSlug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"service-contents",
+								"service-card",
+								":serviceCardSlug"
+							],
+							"variable": [
+								{
+									"key": "serviceCardSlug",
+									"value": "public-limited-company",
+									"description": "Service card slug"
+								}
+							]
+						},
+						"description": "Get service content by service card slug (alternative endpoint)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Service Content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"slug\": \"new-service-content\",\n  \"heroSection\": {\n    \"heading\": \"Service Heading\",\n    \"subtext\": \"Service description\",\n    \"primaryCTAs\": [\"CTA 1\", \"CTA 2\"]\n  },\n  \"whyChoose\": {\n    \"bestFor\": [\"Reason 1\", \"Reason 2\"],\n    \"notSuitableFor\": [\"Not for 1\", \"Not for 2\"]\n  },\n  \"basicRequirements\": [\"Requirement 1\", \"Requirement 2\"],\n  \"keyBenefits\": [\n    {\n      \"benefit\": \"Benefit 1\",\n      \"whyItMatters\": \"Why it matters\"\n    }\n  ],\n  \"whatYouWillGet\": [\"Item 1\", \"Item 2\"],\n  \"smartSupport\": {\n    \"features\": [\"Feature 1\", \"Feature 2\"]\n  },\n  \"packages\": [],\n  \"timeline\": {\n    \"steps\": [],\n    \"totalTime\": \"7-12 days\"\n  },\n  \"stepByStepProcess\": [],\n  \"documentsRequired\": [],\n  \"commonMistakes\": {\n    \"mistakes\": [],\n    \"howWeAvoid\": \"How we avoid\"\n  },\n  \"whyWeAreBetter\": [],\n  \"faqs\": [],\n  \"finalCTA\": {\n    \"ctas\": []\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/service-contents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"service-contents"
+							]
+						},
+						"description": "Create new service content with all sections"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing service contents (detailed business type information)"
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				},
+				"description": "Health check endpoint to verify API is running"
+			},
+			"response": []
+		},
+		{
+			"name": "Examples - Business Types",
+			"item": [
+				{
+					"name": "Public Limited Company",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/public-limited-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"public-limited-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/public-limited-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"public-limited-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Private Limited Company",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/private-limited-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"private-limited-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/private-limited-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"private-limited-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "One Person Company (OPC)",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/one-person-company-opc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"one-person-company-opc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/one-person-company-opc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"one-person-company-opc"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Section 8 Company",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/section-8-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"section-8-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/section-8-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"section-8-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producer Company",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/producer-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"producer-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/producer-company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"producer-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Limited Liability Partnership (LLP)",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/limited-liability-partnership-llp",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"limited-liability-partnership-llp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/limited-liability-partnership-llp",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"limited-liability-partnership-llp"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Partnership Firm",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/partnership-firm",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"partnership-firm"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/partnership-firm",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"partnership-firm"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Proprietorship Firm",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/proprietorship-firm",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"proprietorship-firm"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/proprietorship-firm",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"proprietorship-firm"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "HUF (Hindu Undivided Family)",
+					"item": [
+						{
+							"name": "Get Service Card with Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sub-services/service-card/huf-hindu-undivided-family",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sub-services",
+										"service-card",
+										"huf-hindu-undivided-family"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Service Content",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/service-contents/huf-hindu-undivided-family",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"service-contents",
+										"huf-hindu-undivided-family"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Example requests for all 9 business types"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}
+

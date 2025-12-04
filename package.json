@@ -1,0 +1,41 @@
+{
+    "name": "online-filing-india-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "serve": "node build/server.js",
+        "start": "npm run serve",
+        "lint": "npx eslint --fix .",
+        "start-server": "npm run build && node build/server.js",
+        "watch": "nodemon",
+        "dev": "nodemon",
+        "seed:sub-services": "ts-node src/scripts/seed-sub-services.ts"
+    },
+    "private": true,
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "Hello API service with MongoDB",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "mongodb": "^6.17.0",
+        "morgan": "^1.10.0",
+        "winston": "^3.17.0",
+        "zod": "^3.24.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.22.0",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.1",
+        "@types/morgan": "^1.9.9",
+        "@types/node": "^22.13.10",
+        "eslint": "^9.22.0",
+        "nodemon": "^3.1.9",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    }
+}
+
