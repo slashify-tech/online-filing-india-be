@@ -61,13 +61,15 @@ export interface ServiceContent {
         inputs: string[];
         outputs: string[];
     };
-    packages: Package[];
-    packageComparison?: {
-        features: string[];
-        basic: boolean[];
-        launch: boolean[];
-        premium: boolean[];
-    };
+    // Section 8: Select package - Commented out for now, add in production
+    // packages?: Package[];
+    // Section 10: Package Comparison - Commented out for now, add in production
+    // packageComparison?: {
+    //     features: string[];
+    //     basic: boolean[];
+    //     launch: boolean[];
+    //     premium: boolean[];
+    // };
     timeline: {
         steps: TimelineStep[];
         totalTime: string;
@@ -79,16 +81,19 @@ export interface ServiceContent {
         filing: string;
     }[];
     smartAddOns?: string[];
-    commonMistakes: {
-        mistakes: string[];
-        howWeAvoid: string;
-    };
-    whyWeAreBetter: {
-        feature: string;
-        others: boolean;
-        onlineFilingIndia: boolean;
-    }[];
-    testimonials?: string[];
+    // Section 16: Common Mistakes - Commented out for now, add in production
+    // commonMistakes?: {
+    //     mistakes: string[];
+    //     howWeAvoid: string;
+    // };
+    // Section 17: Why We Are Better - Commented out for now, add in production
+    // whyWeAreBetter?: {
+    //     feature: string;
+    //     others: boolean;
+    //     onlineFilingIndia: boolean;
+    // }[];
+    // Section 18: Testimonials - Commented out for now, add in production
+    // testimonials?: string[];
     faqs: FAQ[];
     finalCTA: {
         heading?: string;
