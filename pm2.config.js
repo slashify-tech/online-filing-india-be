@@ -2,9 +2,9 @@ module.exports = {
     apps: [
       {
         name: "online-filing-india-api",
-        post_update: ["npm install", "npm run build"],
         script: "build/server.js" ,       // compiled JS output
         cwd: "./",                   // project root
+        post_update: ["npm install", "npm run build"],
         instances: 1,                    // or 'max' for cluster mode
         exec_mode: "fork",
         env: {
