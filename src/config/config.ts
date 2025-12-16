@@ -14,6 +14,10 @@ const configSchema = z.object({
         uri: z.string(),
         dbName: z.string(),
     }),
+    jwt: z.object({
+        secret: z.string().default('your-secret-key-change-in-production'),
+        expiresIn: z.string().default('7d'),
+    }),
 });
 
 type ConfigType = z.infer<typeof configSchema>;
@@ -27,6 +31,10 @@ const config: ConfigType = {
     mongodb: {
         uri: process.env.MONGODB_URI,
         dbName: process.env.MONGODB_DB_NAME,
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
+        expiresIn: process.env.JWT_EXPIRES_IN || '7d',
     },
 };
 

@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import subServiceRoutes from './sub-service.routes';
 import serviceContentRoutes from './service-content.routes';
+import authRoutes from './auth.routes';
 
 const router = Router();
 
 // Mount routes
 router.use('/sub-services', subServiceRoutes);
 router.use('/service-contents', serviceContentRoutes);
+router.use('/auth', authRoutes);
 
 // Health check endpoint
 router.get('/health', (req, res) => {
