@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "wisetalk-hello-api-collection",
-		"name": "Wisetalk Hello API - Sub Services & Service Contents",
-		"description": "API collection for Sub Services and Service Contents management",
+		"_postman_id": "online-business-registration-api-collection",
+		"name": "Online Business Registration API Collection",
+		"description": "API collection for Online Business Registration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -118,35 +118,6 @@
 			"name": "Authentication",
 			"item": [
 				{
-					"name": "Send OTP (Email)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"user@example.com\",\n  \"type\": \"email\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/auth/send-otp",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"send-otp"
-							]
-						},
-						"description": "Send OTP to email address. OTP will be logged to console in development."
-					},
-					"response": []
-				},
-				{
 					"name": "Send OTP (Contact)",
 					"request": {
 						"method": "POST",
@@ -158,7 +129,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"9876543210\",\n  \"type\": \"contact\"\n}"
+							"raw": "{\n  \"identifier\": \"9876543211\",\n  \"type\": \"contact\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/auth/send-otp",
@@ -187,7 +158,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"user@example.com\",\n  \"contact\": \"9876543210\",\n  \"emailOTP\": \"123456\",\n  \"contactOTP\": \"123456\"\n}"
+							"raw": "{\n  \"contact\": \"9876543211\",\n  \"contactOTP\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/auth/signup",
@@ -200,36 +171,7 @@
 								"signup"
 							]
 						},
-						"description": "Signup with username, email, contact, and OTPs. emailOTP and contactOTP are optional but recommended for verification. Returns JWT token in response."
-					},
-					"response": []
-				},
-				{
-					"name": "Signin (Email)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"user@example.com\",\n  \"otp\": \"123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/auth/signin",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"signin"
-							]
-						},
-						"description": "Signin using email and OTP. First send OTP to email, then use it here. Returns JWT token in response. Use this token in Authorization header (Bearer TOKEN) for protected routes."
+						"description": "Signup with username, email, contact, and OTPs. emailOTP and contactOTP are optional but recommended for verification."
 					},
 					"response": []
 				},
@@ -245,7 +187,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"9876543210\",\n  \"otp\": \"123456\"\n}"
+							"raw": "{\n  \"identifier\": \"9876543211\",\n  \"otp\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/auth/signin",
@@ -258,36 +200,7 @@
 								"signin"
 							]
 						},
-						"description": "Signin using contact number and OTP. First send OTP to contact, then use it here. Returns JWT token in response. Use this token in Authorization header (Bearer TOKEN) for protected routes."
-					},
-					"response": []
-				},
-				{
-					"name": "Verify OTP",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"user@example.com\",\n  \"otp\": \"123456\",\n  \"type\": \"email\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/auth/verify-otp",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"verify-otp"
-							]
-						},
-						"description": "Verify OTP standalone endpoint. Type can be 'email' or 'contact'."
+						"description": "Signin using contact number and OTP. First send OTP to contact, then use it here."
 					},
 					"response": []
 				}
@@ -401,25 +314,6 @@
 				}
 			],
 			"description": "Endpoints for managing service contents (detailed business type information)"
-		},
-		{
-			"name": "Health Check",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/api/health",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"api",
-						"health"
-					]
-				},
-				"description": "Health check endpoint to verify API is running"
-			},
-			"response": []
 		},
 		{
 			"name": "Examples - Business Types",
@@ -822,6 +716,25 @@
 				}
 			],
 			"description": "Example requests for all 9 business types"
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				},
+				"description": "Health check endpoint to verify API is running"
+			},
+			"response": []
 		}
 	],
 	"variable": [
@@ -832,8 +745,3 @@
 		}
 	]
 }
-
-
-
-
-

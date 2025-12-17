@@ -18,3 +18,5 @@ router.post('/verify-otp', (req, res) => authController.verifyOTP(req, res));
 
 export default router;
 
+
+

@@ -89,22 +89,22 @@ export class AuthController {
      */
     async signup(req: Request, res: Response): Promise<void> {
         try {
-            const { username, email, contact, emailOTP, contactOTP }: SignupRequest & { emailOTP?: string; contactOTP?: string } = req.body;
+            const { username, email, contact, emailOTP, contactOTP }: SignupRequest = req.body;
 
-            if (!username || !email || !contact) {
+            // Contact is required
+            if (!contact) {
                 res.status(400).json({
                     error: 'Bad Request',
-                    message: 'username, email, and contact are required',
+                    message: 'contact is required',
                 });
                 return;
             }
 
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
+            // Contact OTP is required
+            if (!contactOTP) {
                 res.status(400).json({
                     error: 'Bad Request',
-                    message: 'Invalid email format',
+                    message: 'contactOTP is required',
                 });
                 return;
             }
@@ -119,20 +119,19 @@ export class AuthController {
                 return;
             }
 
-            // Check if user already exists
-            const existingUserByEmail = await this.mongoDBService.findOne<UserDocument>(
-                this.userCollection,
-                { email } as any
-            );
-
-            if (existingUserByEmail) {
-                res.status(409).json({
-                    error: 'Conflict',
-                    message: 'User with this email already exists',
-                });
-                return;
+            // Validate email format if provided
+            if (email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    res.status(400).json({
+                        error: 'Bad Request',
+                        message: 'Invalid email format',
+                    });
+                    return;
+                }
             }
 
+            // Check if user already exists by contact
             const existingUserByContact = await this.mongoDBService.findOne<UserDocument>(
                 this.userCollection,
                 { contact } as any
@@ -146,24 +145,51 @@ export class AuthController {
                 return;
             }
 
-            const existingUserByUsername = await this.mongoDBService.findOne<UserDocument>(
-                this.userCollection,
-                { username } as any
-            );
+            // Check if user already exists by email (if provided)
+            if (email) {
+                const existingUserByEmail = await this.mongoDBService.findOne<UserDocument>(
+                    this.userCollection,
+                    { email } as any
+                );
 
-            if (existingUserByUsername) {
-                res.status(409).json({
-                    error: 'Conflict',
-                    message: 'Username already taken',
+                if (existingUserByEmail) {
+                    res.status(409).json({
+                        error: 'Conflict',
+                        message: 'User with this email already exists',
+                    });
+                    return;
+                }
+            }
+
+            // Check if username is already taken (if provided)
+            if (username) {
+                const existingUserByUsername = await this.mongoDBService.findOne<UserDocument>(
+                    this.userCollection,
+                    { username } as any
+                );
+
+                if (existingUserByUsername) {
+                    res.status(409).json({
+                        error: 'Conflict',
+                        message: 'Username already taken',
+                    });
+                    return;
+                }
+            }
+
+            // Verify contact OTP (required)
+            const isContactVerified = await this.otpService.verifyOTP(contact, contactOTP, 'contact', 'signup');
+            if (!isContactVerified) {
+                res.status(400).json({
+                    error: 'Bad Request',
+                    message: 'Invalid or expired contact OTP',
                 });
                 return;
             }
 
-            // Verify OTPs if provided
+            // Verify email OTP if provided
             let isEmailVerified = false;
-            let isContactVerified = false;
-
-            if (emailOTP) {
+            if (email && emailOTP) {
                 isEmailVerified = await this.otpService.verifyOTP(email, emailOTP, 'email', 'signup');
                 if (!isEmailVerified) {
                     res.status(400).json({
@@ -174,23 +200,12 @@ export class AuthController {
                 }
             }
 
-            if (contactOTP) {
-                isContactVerified = await this.otpService.verifyOTP(contact, contactOTP, 'contact', 'signup');
-                if (!isContactVerified) {
-                    res.status(400).json({
-                        error: 'Bad Request',
-                        message: 'Invalid or expired contact OTP',
-                    });
-                    return;
-                }
-            }
-
-            // Create user
+            // Create user - only store verified contact, email/username only if verified
             const userDoc: UserDocument = {
-                username,
-                email,
+                username: username || null,
+                email: (email && isEmailVerified) ? email : null,
                 contact,
-                isEmailVerified: true,
+                isEmailVerified: isEmailVerified,
                 isContactVerified: true,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -202,21 +217,21 @@ export class AuthController {
             // Generate JWT token
             const token = this.jwtService.generateToken({
                 userId: userIdString,
-                username,
-                email,
+                username: username || '',
+                email: email || '',
             });
 
-            logger.info(`User created: ${username} (${email})`);
+            logger.info(`User created with contact: ${contact}${email ? ` (${email})` : ''}`);
 
             res.status(201).json({
                 message: 'User created successfully',
                 data: {
                     userId: userIdString,
-                    username,
-                    email,
-                    contact,
-                    isEmailVerified: true,
-                    isContactVerified: true,
+                    username: userDoc.username,
+                    email: userDoc.email,
+                    contact: userDoc.contact,
+                    isEmailVerified: userDoc.isEmailVerified,
+                    isContactVerified: userDoc.isContactVerified,
                     token,
                 },
             });
@@ -294,11 +309,11 @@ export class AuthController {
             const userIdString = user._id?.toString() || '';
             const token = this.jwtService.generateToken({
                 userId: userIdString,
-                username: user.username,
-                email: user.email,
+                username: user.username || '',
+                email: user.email || '',
             });
 
-            logger.info(`User signed in: ${user.username} (${identifier})`);
+            logger.info(`User signed in: ${user.username || user.contact} (${identifier})`);
 
             res.json({
                 message: 'Signin successful',

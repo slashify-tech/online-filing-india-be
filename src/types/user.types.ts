@@ -1,6 +1,6 @@
 export interface User {
-    username: string;
-    email: string;
+    username: string | null;
+    email: string | null;
     contact: string;
     isEmailVerified: boolean;
     isContactVerified: boolean;
@@ -23,9 +23,11 @@ export interface OTPDocument {
 }
 
 export interface SignupRequest {
-    username: string;
-    email: string;
+    username?: string;
+    email?: string;
     contact: string;
+    contactOTP: string;
+    emailOTP?: string;
 }
 
 export interface SigninRequest {
@@ -42,4 +44,6 @@ export interface SendOTPRequest {
     identifier: string; // email or contact
     type: 'email' | 'contact';
 }
+
+
 
