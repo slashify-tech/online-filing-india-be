@@ -275,17 +275,58 @@ export class AuthController {
             }
 
             // Find user by email or contact
-            const user = await this.mongoDBService.findOne<UserDocument>(
+            let user = await this.mongoDBService.findOne<UserDocument>(
                 this.userCollection,
                 isEmail ? { email: identifier } : { contact: identifier } as any
             );
 
+            // If user doesn't exist, create it (only for contact-based signin)
             if (!user) {
-                res.status(404).json({
-                    error: 'Not Found',
-                    message: 'User not found',
-                });
-                return;
+                if (isEmail) {
+                    // For email-based signin, we can't create user without contact
+                    res.status(404).json({
+                        error: 'Not Found',
+                        message: 'User not found. Please signup first.',
+                    });
+                    return;
+                } else {
+                    // Create new user with contact number
+                    const userDoc: UserDocument = {
+                        username: null,
+                        email: null,
+                        contact: identifier,
+                        isEmailVerified: false,
+                        isContactVerified: true, // Verified via OTP
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                    };
+
+                    const userId = await this.mongoDBService.insertOne<UserDocument>(this.userCollection, userDoc);
+                    const userIdString = userId?.toString() || '';
+
+                    // Generate JWT token for newly created user
+                    const token = this.jwtService.generateToken({
+                        userId: userIdString,
+                        username: '',
+                        email: '',
+                    });
+
+                    logger.info(`New user created during signin with contact: ${identifier}`);
+
+                    res.json({
+                        message: 'User created and signed in successfully',
+                        data: {
+                            userId: userIdString,
+                            username: null,
+                            email: null,
+                            contact: identifier,
+                            isEmailVerified: false,
+                            isContactVerified: true,
+                            token,
+                        },
+                    });
+                    return;
+                }
             }
 
             // Update verification status if needed
