@@ -6,8 +6,8 @@ import logger from '../utils/logger';
 
 async function seedSubServices() {
     const mongoDBService = new MongoDBService();
-    const subServicesCollection = 'subServices';
-    const serviceContentCollection = 'serviceContents';
+    const subServicesCollection = 'service_categories';
+    const serviceContentCollection = 'services';
 
     try {
         // Wait for MongoDB connection to be established

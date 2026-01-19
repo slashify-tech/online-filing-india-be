@@ -11,12 +11,12 @@ router.get('/', (req, res) => serviceContentController.getAllServiceContents(req
 router.get('/:slug', (req, res) => serviceContentController.getServiceContentBySlug(req, res));
 
 // GET /api/service-contents/service-card/:serviceCardSlug - Get service content by service card slug
-router.get('/service-card/:serviceCardSlug', (req, res) =>
-    serviceContentController.getServiceContentByServiceCardSlug(req, res)
-);
+// router.get('/service-card/:serviceCardSlug', (req, res) =>
+//     serviceContentController.getServiceContentByServiceCardSlug(req, res)
+// );
 
 // POST /api/service-contents - Create a new service content
-router.post('/', (req, res) => serviceContentController.createServiceContent(req, res));
+// router.post('/', (req, res) => serviceContentController.createServiceContent(req, res));
 
 export default router;
 

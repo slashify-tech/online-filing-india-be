@@ -1,5 +1,6 @@
 import { ServiceContent } from '../types/sub-service.types';
 import { remainingServiceContent } from './service-content-remaining.seed';
+import { manageBusinessServicesContent } from './manage-business-services.seed';
 
 export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
     {
@@ -1156,5 +1157,7 @@ export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
     },
     // Remaining business types: LLP, Partnership, Proprietorship, HUF
     ...remainingServiceContent,
+    // Manage Business Services
+    ...manageBusinessServicesContent,
 ];
 
