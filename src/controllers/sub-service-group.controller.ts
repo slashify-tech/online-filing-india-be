@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ObjectId } from 'mongodb';
 import { MongoDBService } from '../service/mongodb.service';
 import logger from '../utils/logger';
 import { SubServiceGroupDocument } from '../types/sub-service-group.types';
@@ -139,9 +140,56 @@ export class SubServiceGroupController {
         }
     }
 
+    async getSubServiceGroupById(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+
+            if (!id) {
+                res.status(400).json({
+                    error: 'Bad Request',
+                    message: 'ID parameter is required',
+                });
+                return;
+            }
+
+            // Validate ObjectId format
+            if (!ObjectId.isValid(id)) {
+                res.status(400).json({
+                    error: 'Bad Request',
+                    message: 'Invalid ID format',
+                });
+                return;
+            }
+
+            const subServiceGroup = await this.mongoDBService.findOne<SubServiceGroupDocument>(
+                this.collectionName,
+                { _id: new ObjectId(id) } as any
+            );
+
+            if (!subServiceGroup) {
+                res.status(404).json({
+                    error: 'Not Found',
+                    message: `Sub service group with ID "${id}" not found`,
+                });
+                return;
+            }
+
+            res.json({
+                message: 'Sub service group retrieved successfully',
+                data: subServiceGroup,
+            });
+        } catch (error: any) {
+            logger.error('Error in getSubServiceGroupById', error);
+            res.status(500).json({
+                error: 'Internal Server Error',
+                message: error.message,
+            });
+        }
+    }
+
     async createSubServiceGroup(req: Request, res: Response): Promise<void> {
         try {
-            const { groupName, groupSlug, description, serviceSlugs, parentServiceSlug } = req.body;
+            const { groupName, groupSlug, description, serviceSlugs, parentServiceSlug, services } = req.body;
 
             if (!groupName || !groupSlug || !description || !serviceSlugs || !parentServiceSlug) {
                 res.status(400).json({
@@ -171,6 +219,7 @@ export class SubServiceGroupController {
                 description,
                 serviceSlugs,
                 parentServiceSlug,
+                services: services || undefined,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };

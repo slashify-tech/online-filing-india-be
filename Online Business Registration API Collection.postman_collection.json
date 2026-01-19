@@ -1,16 +1,18 @@
 {
 	"info": {
-		"_postman_id": "online-business-registration-api-collection",
+		"_postman_id": "832b5736-113a-409d-84b9-54d31961a245",
 		"name": "Online Business Registration API Collection",
 		"description": "API collection for Online Business Registration",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27177425",
+		"_collection_link": "https://sov555.postman.co/workspace/BrandMonkey~88c72174-2f8e-4292-9bb9-3cd799e17c33/collection/27177425-832b5736-113a-409d-84b9-54d31961a245?action=share&source=collection_link&creator=27177425"
 	},
 	"item": [
 		{
-			"name": "Sub Services",
+			"name": "Services Categories",
 			"item": [
 				{
-					"name": "Get All Sub Services",
+					"name": "Get All Service Categories",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -29,7 +31,26 @@
 					"response": []
 				},
 				{
-					"name": "Get Sub Service by Slug",
+					"name": "(NEW) Get All Service Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/service-categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"service-categories"
+							]
+						},
+						"description": "Get all sub-services (categories like 'Start Business', 'Manage Business') with their service cards"
+					},
+					"response": []
+				},
+				{
+					"name": "Get single service category by Slug",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -56,58 +77,29 @@
 					"response": []
 				},
 				{
-					"name": "Get Service Card with Content",
+					"name": "(NEW) Get single service category by Slug",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/sub-services/service-card/:serviceCardSlug",
+							"raw": "{{baseUrl}}/api/service-categories/:slug",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
-								"sub-services",
-								"service-card",
-								":serviceCardSlug"
+								"service-categories",
+								":slug"
 							],
 							"variable": [
 								{
-									"key": "serviceCardSlug",
-									"value": "public-limited-company",
-									"description": "Service card slug (e.g., public-limited-company, private-limited-company)"
+									"key": "slug",
+									"value": "start-business",
+									"description": "Sub service slug (e.g., start-business, manage-business)"
 								}
 							]
 						},
-						"description": "Get a service card with its full detailed content including hero section, packages, FAQs, etc."
-					},
-					"response": []
-				},
-				{
-					"name": "Create Sub Service",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"slug\": \"new-category\",\n  \"title\": \"New Category Title\",\n  \"ServiceCard\": [\n    {\n      \"icon\": \"icon.svg\",\n      \"title\": \"Service Card Title\",\n      \"slug\": \"service-card-slug\",\n      \"content\": \"Service card description\",\n      \"serviceContentId\": null\n    }\n  ]\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/sub-services",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"sub-services"
-							]
-						},
-						"description": "Create a new sub-service category"
+						"description": "Get a specific sub-service by slug with all its service cards"
 					},
 					"response": []
 				}
@@ -211,7 +203,7 @@
 			"name": "Service Contents",
 			"item": [
 				{
-					"name": "Get All Service Contents",
+					"name": "(NEW) Get All Service Contents",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -230,7 +222,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Service Content by Slug",
+					"name": "(NEW) Get Single Service Content by Slug",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -255,65 +247,62 @@
 						"description": "Get detailed service content by slug including all sections: hero, packages, FAQs, timeline, etc."
 					},
 					"response": []
-				},
+				}
+			],
+			"description": "Endpoints for managing service contents (detailed business type information)"
+		},
+		{
+			"name": "Sub Service Groups",
+			"item": [
 				{
-					"name": "Get Service Content by Service Card Slug",
+					"name": "Get All Sub Service Groups",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/service-contents/service-card/:serviceCardSlug",
+							"raw": "{{baseUrl}}/api/sub-service-groups",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
-								"service-contents",
-								"service-card",
-								":serviceCardSlug"
-							],
-							"variable": [
-								{
-									"key": "serviceCardSlug",
-									"value": "public-limited-company",
-									"description": "Service card slug"
-								}
+								"sub-service-groups"
 							]
 						},
-						"description": "Get service content by service card slug (alternative endpoint)"
+						"description": "Get all sub-service groups (e.g., Trademark Services, FSSAI Services, Export & Import Services, NGO Registration)"
 					},
 					"response": []
 				},
 				{
-					"name": "Create Service Content",
+					"name": "Get Sub Service Group by Slug",
 					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"slug\": \"new-service-content\",\n  \"heroSection\": {\n    \"heading\": \"Service Heading\",\n    \"subtext\": \"Service description\",\n    \"primaryCTAs\": [\"CTA 1\", \"CTA 2\"]\n  },\n  \"whyChoose\": {\n    \"bestFor\": [\"Reason 1\", \"Reason 2\"],\n    \"notSuitableFor\": [\"Not for 1\", \"Not for 2\"]\n  },\n  \"basicRequirements\": [\"Requirement 1\", \"Requirement 2\"],\n  \"keyBenefits\": [\n    {\n      \"benefit\": \"Benefit 1\",\n      \"whyItMatters\": \"Why it matters\"\n    }\n  ],\n  \"whatYouWillGet\": [\"Item 1\", \"Item 2\"],\n  \"smartSupport\": {\n    \"features\": [\"Feature 1\", \"Feature 2\"]\n  },\n  \"packages\": [],\n  \"timeline\": {\n    \"steps\": [],\n    \"totalTime\": \"7-12 days\"\n  },\n  \"stepByStepProcess\": [],\n  \"documentsRequired\": [],\n  \"commonMistakes\": {\n    \"mistakes\": [],\n    \"howWeAvoid\": \"How we avoid\"\n  },\n  \"whyWeAreBetter\": [],\n  \"faqs\": [],\n  \"finalCTA\": {\n    \"ctas\": []\n  }\n}"
-						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/service-contents",
+							"raw": "{{baseUrl}}/api/sub-service-groups/by-slug/:groupSlug",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
-								"service-contents"
+								"sub-service-groups",
+								"by-slug",
+								":groupSlug"
+							],
+							"variable": [
+								{
+									"key": "groupSlug",
+									"value": "trademark-services",
+									"description": "Group slug (e.g., trademark-services, fssai-services, export-import-services, ngo-registration)"
+								}
 							]
 						},
-						"description": "Create new service content with all sections"
+						"description": "Get a specific sub-service group by its slug with all services data included"
 					},
 					"response": []
 				}
 			],
-			"description": "Endpoints for managing service contents (detailed business type information)"
+			"description": "Endpoints for managing sub-service groups (groups of related services like Trademark Services, FSSAI Services, etc.)"
 		},
 		{
 			"name": "Examples - Business Types",

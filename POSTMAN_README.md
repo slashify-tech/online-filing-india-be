@@ -79,7 +79,7 @@ This directory contains Postman collections and environment files for testing th
 
 ```bash
 # Get Public Limited Company with full content
-GET http://localhost:5000/api/sub-services/service-card/public-limited-company
+GET http://localhost:5000/api/service-categories/service-card/public-limited-company
 ```
 
 ## Response Structure
