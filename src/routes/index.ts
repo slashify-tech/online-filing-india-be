@@ -2,6 +2,7 @@ import { Router } from 'express';
 import subServiceRoutes from './sub-service.routes';
 import serviceContentRoutes from './service-content.routes';
 import authRoutes from './auth.routes';
+import subServiceGroupRoutes from './sub-service-group.routes';
 
 const router = Router();
 
@@ -9,6 +10,7 @@ const router = Router();
 router.use('/sub-services', subServiceRoutes);
 router.use('/service-contents', serviceContentRoutes);
 router.use('/auth', authRoutes);
+router.use('/sub-service-groups', subServiceGroupRoutes);
 
 // Health check endpoint
 router.get('/health', (req, res) => {

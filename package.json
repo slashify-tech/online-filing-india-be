@@ -10,7 +10,8 @@
         "start-server": "npm run build && node build/server.js",
         "watch": "nodemon",
         "dev": "nodemon",
-        "seed:sub-services": "ts-node src/scripts/seed-sub-services.ts"
+        "seed:sub-services": "ts-node src/scripts/seed-sub-services.ts",
+        "seed:sub-service-groups": "ts-node src/scripts/seed-sub-service-groups.ts"
     },
     "private": true,
     "keywords": [],

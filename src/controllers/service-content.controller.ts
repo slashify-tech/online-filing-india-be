@@ -5,7 +5,7 @@ import { ServiceContentDocument } from '../types/sub-service.types';
 
 export class ServiceContentController {
     private mongoDBService: MongoDBService;
-    private collectionName = 'serviceContents';
+    private collectionName = 'services';
 
     constructor() {
         this.mongoDBService = new MongoDBService();

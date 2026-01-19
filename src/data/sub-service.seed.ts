@@ -88,7 +88,7 @@ export const SubServiceData: SubService[] = [
                 title: 'Business Licences & Registration',
                 slug: 'business-licences-registration',
                 content:
-                    'Apply, renew, or upgrade your business licenses and registrations with complete expert assistance and faster approvals.',
+                    'Apply, renew, or upgrade your business licenses and registrations with complete expert assistance and faster approvals. Services include Trademark Registration, ISO Certification, Import Export Code, Startup India Registration, FSSAI, MSME/Udyam, Shop & Establishment, Professional Tax, PAN/TAN, LEI, PF, ESIC, RERA, Barcodes, BIS, NSIC, GEM, Logo Design, Copyright, Patent, and more.',
                 serviceContentId: null,
             },
             {

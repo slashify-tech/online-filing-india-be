@@ -81,6 +81,13 @@ export interface ServiceContent {
         filing: string;
     }[];
     smartAddOns?: string[];
+    serviceSlugMapping?: Record<string, string>; // Maps display names to slugs
+    subServiceGroups?: Array<{
+        groupName: string;
+        groupSlug: string;
+        description: string;
+        serviceSlugs: string[];
+    }>; // Sub-service groups for organizing related services
     // Section 16: Common Mistakes - Commented out for now, add in production
     // commonMistakes?: {
     //     mistakes: string[];

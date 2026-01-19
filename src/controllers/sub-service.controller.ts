@@ -5,7 +5,7 @@ import { SubServiceDocument, ServiceContentDocument } from '../types/sub-service
 
 export class SubServiceController {
     private mongoDBService: MongoDBService;
-    private collectionName = 'subServices';
+    private collectionName = 'service_categories';
 
     constructor() {
         this.mongoDBService = new MongoDBService();
@@ -165,13 +165,13 @@ export class SubServiceController {
             let serviceContent = null;
             if (serviceCard.serviceContentId) {
                 serviceContent = await this.mongoDBService.findOne<ServiceContentDocument>(
-                    'serviceContents',
+                    'services',
                     { _id: serviceCard.serviceContentId } as any
                 );
             } else {
                 // Try to find by slug as fallback
                 serviceContent = await this.mongoDBService.findOne<ServiceContentDocument>(
-                    'serviceContents',
+                    'services',
                     { slug: serviceCardSlug } as any
                 );
             }
