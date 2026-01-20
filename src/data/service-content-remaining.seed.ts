@@ -1,8 +1,12 @@
 // Remaining business types: LLP, Partnership, Proprietorship, HUF
 // This file contains the remaining service content data
 
-export const remainingServiceContent = [
+import { ServiceContent } from '../types/sub-service.types';
+
+export const remainingServiceContent: { title: string; type: string; slug: string; content: ServiceContent }[] = [
     {
+        title: 'Limited Liability Partnership (LLP)',
+        type: 'registration',
         slug: 'limited-liability-partnership-llp',
         content: {
             heroSection: {
@@ -221,6 +225,8 @@ export const remainingServiceContent = [
     },
     // Partnership Firm
     {
+        title: 'Partnership Firm',
+        type: 'registration',
         slug: 'partnership-firm',
         content: {
             heroSection: {
@@ -442,6 +448,8 @@ export const remainingServiceContent = [
     },
     // Proprietorship
     {
+        title: 'Proprietorship Firm',
+        type: 'registration',
         slug: 'proprietorship-firm',
         content: {
             heroSection: {
@@ -648,6 +656,8 @@ export const remainingServiceContent = [
     },
     // HUF
     {
+        title: 'HUF (Hindu Undivided Family)',
+        type: 'registration',
         slug: 'huf-hindu-undivided-family',
         content: {
             heroSection: {

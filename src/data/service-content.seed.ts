@@ -2,8 +2,10 @@ import { ServiceContent } from '../types/sub-service.types';
 import { remainingServiceContent } from './service-content-remaining.seed';
 import { manageBusinessServicesContent } from './manage-business-services.seed';
 
-export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
+export const ServiceContentData: { title: string; type: string; slug: string; content: ServiceContent }[] = [
     {
+        title: 'Public Limited Company',
+        type: 'registration',
         slug: 'public-limited-company',
         content: {
             heroSection: {
@@ -228,6 +230,8 @@ export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
         },
     },
     {
+        title: 'Private Limited Company',
+        type: 'registration',
         slug: 'private-limited-company',
         content: {
             heroSection: {
@@ -452,6 +456,8 @@ export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
     },
     // OPC - One Person Company
     {
+        title: 'One Person Company (OPC)',
+        type: 'registration',
         slug: 'one-person-company-opc',
         content: {
             heroSection: {
@@ -683,6 +689,8 @@ export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
     },
     // Section 8 Company
     {
+        title: 'Section 8 Company',
+        type: 'registration',
         slug: 'section-8-company',
         content: {
             heroSection: {
@@ -919,6 +927,8 @@ export const ServiceContentData: { slug: string; content: ServiceContent }[] = [
     },
     // Producer Company - Adding simplified version due to length constraints
     {
+        title: 'Producer Company',
+        type: 'registration',
         slug: 'producer-company',
         content: {
             heroSection: {
