@@ -51,6 +51,8 @@ async function seedSubServices() {
             }
 
             const serviceContentDoc: ServiceContentDocument = {
+                title: serviceContent.title,
+                type: serviceContent.type,
                 ...serviceContent.content,
                 slug: serviceContent.slug,
                 createdAt: new Date(),

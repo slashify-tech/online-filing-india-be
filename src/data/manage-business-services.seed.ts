@@ -1,8 +1,10 @@
 import { ServiceContent } from '../types/sub-service.types';
 import { businessLicencesSubGroups } from './business-licences-sub-groups.seed';
 
-export const manageBusinessServicesContent: { slug: string; content: ServiceContent }[] = [
+export const manageBusinessServicesContent: { title: string; type: string; slug: string; content: ServiceContent }[] = [
     {
+        title: 'Business Licences & Registration',
+        type: 'compliance',
         slug: 'business-licences-registration',
         content: {
             heroSection: {
@@ -119,6 +121,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'GST & Tax Filings',
+        type: 'compliance',
         slug: 'gst-tax-filings',
         content: {
             heroSection: {
@@ -170,6 +174,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Annual Compliances & Filings',
+        type: 'compliance',
         slug: 'annual-compliances-filings',
         content: {
             heroSection: {
@@ -215,6 +221,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Accounting & Virtual CFO Services',
+        type: 'compliance',
         slug: 'accounting-virtual-cfo-services',
         content: {
             heroSection: {
@@ -255,6 +263,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Monthly Retainer Packages',
+        type: 'compliance',
         slug: 'monthly-retainer-packages',
         content: {
             heroSection: {
@@ -295,6 +305,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Compliance Calendar',
+        type: 'compliance',
         slug: 'compliance-calendar',
         content: {
             heroSection: {
@@ -333,6 +345,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Check Compliance Score',
+        type: 'compliance',
         slug: 'check-compliance-score',
         content: {
             heroSection: {
@@ -371,6 +385,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'FilingBuddy AI Assistant',
+        type: 'compliance',
         slug: 'filingbuddy-ai-assistant',
         content: {
             heroSection: {
@@ -411,6 +427,8 @@ export const manageBusinessServicesContent: { slug: string; content: ServiceCont
         },
     },
     {
+        title: 'Expert Advisory Services',
+        type: 'compliance',
         slug: 'expert-advisory-services',
         content: {
             heroSection: {

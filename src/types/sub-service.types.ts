@@ -122,6 +122,8 @@ export interface SubServiceDocument extends SubService {
 
 export interface ServiceContentDocument extends ServiceContent {
     _id?: string;
+    title: string;
+    type: string;
     slug: string; // References the ServiceCard slug
     createdAt?: Date;
     updatedAt?: Date;
